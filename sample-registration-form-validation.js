@@ -1,4 +1,3 @@
-
 function formValidation()
 {
     var uid = document.registration.userid;
@@ -11,23 +10,20 @@ function formValidation()
     var umsex = document.registration.msex;
     var ufsex = document.registration.fsex; if(userid_validation(uid,5,12))
 {
-    if(uid_passid_validation(5,12))
+    if(passid_validation(passid,7,12))
     {
-        if(passid_validation(passid,7,12))
+        if(allLetter(uname))
         {
-            if(allLetter(uname))
+            if(alphanumeric(uadd))
             {
-                if(alphanumeric(uadd))
+                if(countryselect(ucountry))
                 {
-                    if(countryselect(ucountry))
+                    if(allnumeric(uzip))
                     {
-                        if(allnumeric(uzip))
+                        if(ValidateEmail(uemail))
                         {
-                            if(ValidateEmail(uemail))
+                            if(validsex(umsex,ufsex))
                             {
-                                if(validsex(umsex,ufsex))
-                                {
-                                }
                             }
                         }
                     }
@@ -115,14 +111,40 @@ function allnumeric(uzip)
         return false;
     }
 }
-function ValidateEmail(uemail) {
+function ValidateEmail(uemail)
+{
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (uemail.value.match(mailformat)) {
+    if(uemail.value.match(mailformat))
+    {
         return true;
     }
-    else {
+    else
+    {
         alert("You have entered an invalid email address!");
         uemail.focus();
         return false;
+    }
+} function validsex(umsex,ufsex)
+{
+    x=0;
+
+    if(umsex.checked)
+    {
+        x++;
+    } if(ufsex.checked)
+{
+    x++;
+}
+    if(x==0)
+    {
+        alert('Select Male/Female');
+        umsex.focus();
+        return false;
+    }
+    else
+    {
+        alert('Form Succesfully Submitted');
+        window.location.reload();
+        return true;
     }
 }
